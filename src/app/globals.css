@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1e1e1e;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a0a0a0;
+  --accent-yellow: #f5c542;
+  --accent-yellow-dim: #c49a2a;
+  --accent-red: #ef4444;
+  --accent-blue: #3b82f6;
+  --accent-green: #22c55e;
+  --accent-orange: #f97316;
+  --accent-purple: #a855f7;
+  --accent-cyan: #06b6d4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+/* ===== MapLibre overrides ===== */
+.maplibregl-map {
+  font-family: inherit;
+}
+
+.maplibregl-ctrl-attrib {
+  background: rgba(10, 10, 10, 0.7) !important;
+  color: #555 !important;
+  font-size: 10px !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: #777 !important;
+}
+
+.maplibregl-ctrl-group {
+  background: #1e1e1e !important;
+  border: 1px solid #333 !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.maplibregl-ctrl-group button {
+  background: #1e1e1e !important;
+  color: #f5f5f5 !important;
+  border-bottom: 1px solid #333 !important;
+}
+
+.maplibregl-ctrl-group button:hover {
+  background: #2a2a2a !important;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top: none !important;
+}
+
+/* ===== Pin markers ===== */
+.pin-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pin-marker:hover {
+  transform: scale(1.1);
+}
+
+.pin-drop {
+  display: block;
+  animation: pin-bounce-in 0.45s ease-out;
+}
+
+@keyframes pin-bounce-in {
+  0% {
+    transform: translateY(-30px) scale(0.6);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(4px) scale(1.05);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-2px) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== GPS user location ===== */
+.user-location-icon {
+  position: relative;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.gps-dot-container {
+  position: absolute;
+  left: -12px;
+  top: -12px;
+  width: 24px;
+  height: 24px;
+}
+
+.gps-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #06b6d4;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.6);
+}
+
+.gps-pulse-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(6, 182, 212, 0.4);
+  border-radius: 50%;
+  animation: gps-pulse 2s ease-out infinite;
+}
+
+@keyframes gps-pulse {
+  0% {
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+  }
+  100% {
+    width: 56px;
+    height: 56px;
+    opacity: 0;
+  }
+}
+
+/* ===== Vignette overlays ===== */
+.vignette-dark,
+.vignette-light {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vignette-dark {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.45) 75%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.vignette-light {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 0, 0.08) 75%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+
+/* ===== Slide-up animation for bottom sheet ===== */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
